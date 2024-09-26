@@ -20,18 +20,28 @@ class Auction
     }
 
     public function saveAuctionsToDb($auctions)
-    {
-        foreach ($auctions as $auction) {
-            // Convert biddingEndDate to UTCDateTime
-            $auction['biddingEndDate'] = new MongoDB\BSON\UTCDateTime(strtotime($auction['biddingEndDate']) * 1000);
+{
+    foreach ($auctions as $auction) {
+        // Convert biddingEndDate to UTCDateTime
+        $auction['biddingEndDate'] = new MongoDB\BSON\UTCDateTime(strtotime($auction['biddingEndDate']) * 1000);
+        
+        // Set title to productName if it's missing
+        $auction['title'] = $auction['productName'] ?? "Untitled Auction";
 
-            // Check if the auction already exists to avoid duplicates
-            $exists = $this->db->auctions->findOne(['productId' => $auction['productId']]);
-            if (!$exists) {
-                $this->db->auctions->insertOne($auction);
-            }
+        // Check if the auction already exists to avoid duplicates
+        // You can use either productId or title as your unique identifier
+        $exists = $this->db->auctions->findOne(['$or' => [
+            ['productId' => $auction['productId']],
+            ['title' => $auction['title']]
+        ]]);
+
+        if (!$exists) {
+            $this->db->auctions->insertOne($auction);
         }
     }
+}
+
+
 
     public function getActiveAuctions($category = null)
     {

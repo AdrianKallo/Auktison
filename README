@@ -38,33 +38,20 @@ This is a fully functional auction application built using PHP and MongoDB. This
 2. Choose the version suitable for your operating system and follow the installation instructions.
 
 ### Set up MongoDB
-1. **Start MongoDB**:
-   Open a terminal and run the following command:
-   ```bash
-   mongod
+1. **Create the database**:
+   After you downloaded the 'MongoDB' open 'MongoDB Compass' and run 
+    ```bash
+   php db/setup.php
    ```
-   By default, MongoDB runs on port 27017.
-
-2. **Create the database**:
-   You can create the `auctionDB` database and collections manually using MongoDB Compass or use the application to populate it automatically.
-
-## Project Setup
-1. **Configure Database Connection**:
-   Update the `src/config/database.php` file if necessary:
-   ```php
-   $client = new MongoDB\Client("mongodb://localhost:27017");
-   $db = $client->selectDatabase("auctionDB");
-   ```
-
-2. **Set Up Environment Variables** (if applicable):
-   You can set up an `.env` file to manage sensitive information like database credentials.
+   It should create the collections there
 
 ## Running the Application
 1. **Start a local server**:
    You can use PHP's built-in server for testing:
    ```bash
-   php -S localhost:8000 -t public
+   composer start
    ```
+   If you getting error check 'Troubleshooting' part.
 
 2. **Access the application**:
    Open your web browser and go to `http://localhost:8000` to view the auction site.
@@ -76,6 +63,15 @@ This is a fully functional auction application built using PHP and MongoDB. This
 ## Troubleshooting
 - Ensure MongoDB is running and accessible.
 - Check for PHP errors in the server logs if the application doesn't load.
+- Probably need to add mongoDB to php.ini (See php.ini faili lõppu: "extension=php_mongodb.dll")
+- If still broken intall DDL from here and place it in C:\php\ext 'https://pecl.php.net/package/mongodb'
+Version 1.19.0 should do the work.
 
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Lisaks
+
+Kui abi vaja kirjutage Teamsi/Discordi/Gmail/Outlook
+
+Discord "metsaseen#7090"
+
+

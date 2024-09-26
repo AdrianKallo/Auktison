@@ -1,0 +1,28 @@
+{
+    "collections": [
+      {
+        "name": "auctions",
+        "indexes": [
+          {
+            "key": { "title": 1 },
+            "unique": true
+          },
+          {
+            "key": { "startingPrice": 1 }
+          }
+        ]
+      },
+      {
+        "name": "bids",
+        "indexes": [
+          {
+            "key": { "productId": 1 }
+          },
+          {
+            "key": { "amount": -1 }
+          }
+        ]
+      }
+    ]
+  }
+  
